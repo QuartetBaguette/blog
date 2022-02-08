@@ -30,7 +30,6 @@
         "@inertiajs/inertia-vue3": "^0.5.2",
         "@inertiajs/progress": "^0.2.7",
         "@tailwindcss/line-clamp": "^0.3.1",
-        "vue": "^3.2.26",
-        "vue-responsive-video-background-player": "^2.2.0"
+        "vue": "^3.2.26"
     }
 }

@@ -18,9 +18,9 @@ class CreateBlogsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('text');
-            $table->string('description');
+            $table->string('summary');
             $table->string('author');
-            $table->string('imageURL');
+            $table->string('cover');
             $table->integer('readingTime');
             $table->timestamp('creationDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();

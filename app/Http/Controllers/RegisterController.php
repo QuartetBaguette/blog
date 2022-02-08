@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
-    public function register(Request $request) {
-        if (User::where('name', '=', $request->username)->exists()) {
-            dd('username exists');
+    public function store(Request $request) {
+        $username = Str::lower($request->username);
+        $email = Str::lower($request->email);
+        if (User::where('name', '=', $username)->exists()) {
+            dd('Username is already in use');
         }
-        else if (User::where('email', '=', $request->email)->exists()) {
-            dd('email exists');
+        else if (User::where('email', '=', $email)->exists()) {
+            dd('This email is already in use');
         }
         else {
             $this->validate($request, [
@@ -26,13 +32,17 @@ class RegisterController extends Controller
                 'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'imageURL' => $request->imageURL,
             ];
 
             User::create([
                 'name' => $user['username'],
                 'email' => $user['email'],
-                'password' => $user['password']
+                'password' => $user['password'],
+                'imageURL' => $user['imageURL']
             ]);
+
+            return Redirect::route('home');
         }
     }
 }
