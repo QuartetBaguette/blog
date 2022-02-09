@@ -17,12 +17,16 @@ class CreateBlogsTable extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('text');
+            $table->longText('text');
             $table->string('summary');
             $table->string('author');
-            $table->string('authorID');
+            $table->integer('authorID');
             $table->string('cover');
-            $table->integer('readingTime');
+            $table->integer('readingTime')->default(0);
+            $table->boolean('comments')->nullable();
+            $table->boolean('anonymous')->nullable();
+            $table->boolean('likes')->nullable();
+            $table->boolean('featured')->nullable();
             $table->timestamp('creationDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });

@@ -35,7 +35,7 @@
                         <div>
                             <label for="content" class="block text-sm font-medium text-gray-700"> Content </label>
                             <div class="mt-1">
-                                <textarea id="content" v-model="form.content" required="" name="content" rows="15" class="py-3 px-4 block w-full shadow-sm text-black focus:ring-black focus:boring-black border border-gray-500 rounded-md" placeholder="Content" />
+                                <textarea id="content" v-model="form.blogContent" required="" name="content" rows="15" class="py-3 px-4 block w-full shadow-sm text-black focus:ring-black focus:boring-black border border-gray-500 rounded-md" placeholder="Content" />
                             </div>
                             <p class="mt-2 text-sm text-gray-500">Main content of you blog article.</p>
                         </div>
@@ -128,7 +128,7 @@ export default {
         const form = reactive({
             title: null,
             summary: null,
-            content: null,
+            blogContent: null,
             cover: 'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
             readingTime: null,
             comments: null,

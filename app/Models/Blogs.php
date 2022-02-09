@@ -14,6 +14,13 @@ class Blogs extends Model
         'text',
         'summary',
         'author',
+        'authorID',
+        'cover',
         'imageURL',
+        'readingTime',
+        'comments',
+        'anonymous',
+        'likes',
+        'featured',
     ];
 }

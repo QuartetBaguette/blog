@@ -24,7 +24,7 @@ Route::get('/home', function() {
 Route::get('/blogs', function() {
     return Inertia::render('Blogs', [
         'time' => now()->toTimeString(),
-    ]);
+    ])->name('blogs');
 });
 
 //// MIDDLEWARE GUEST
@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/createblog', function() {
         return Inertia::render('CreateBlog');
-    })->name('blog.create');
+    });
 
     Route::get('/settings', function() {
         return Inertia::render('Settings');
