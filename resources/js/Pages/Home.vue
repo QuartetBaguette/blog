@@ -16,50 +16,7 @@
                 </p>
             </div>
 
-            <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-                <div v-for="post in posts" :key="post.title" class="flex flex-col rounded-lg shadow-lg overflow-hidden">
-                    <div class="flex-shrink-0">
-                        <img class="h-48 w-full object-cover" :src="post.cover" alt="" />
-                    </div>
-                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
-                        <div class="flex-1">
-                            <p class="text-sm font-medium text-indigo-600">
-                                <Link href="/blogs" class="hover:underline">
-                                    Article
-                                </Link>
-                            </p>
-                            <Link href="/blogs" class="block mt-2">
-                                <p class="text-xl font-semibold text-gray-900">
-                                    {{ post.title }}
-                                </p>
-                                <p class="mt-3 text-base text-gray-500 line-clamp-4">
-                                    {{ post.summary }}
-                                </p>
-                            </Link>
-                        </div>
-                        <div class="mt-6 flex items-center">
-                            <div class="flex-shrink-0">
-                                <span class="sr-only">{{ post.author }}</span>
-                                <img class="h-10 w-10 rounded-full" :src="" alt="" />
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">
-                                    {{ post.author }}
-                                </p>
-                                <div class="flex space-x-1 text-sm text-gray-500">
-                                    <time :datetime="post.creationDate">
-                                        {{ post.creationDate }}
-                                    </time>
-                                    <span aria-hidden="true">
-                                        &middot;
-                                    </span>
-                                    <span> {{ post.readingTime }} min </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <BlogOverview :posts="posts" />
         </div>
     </div>
 
@@ -70,9 +27,11 @@
 import Nav from '../Shared/Nav';
 import { Link } from '@inertiajs/inertia-vue3';
 import Footer from "../Shared/Footer";
+import BlogOverview from "../Shared/BlogOverview";
 
 export default {
     components: {
+        BlogOverview,
         Footer,
         Nav,
         Link,

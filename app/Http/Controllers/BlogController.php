@@ -35,4 +35,8 @@ class BlogController extends Controller
 
         return redirect('blogs');
     }
+
+    public function deleteBlog(Request $request) {
+        dd($request);
+    }
 }

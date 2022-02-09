@@ -2,8 +2,6 @@
 
     <Nav />
 
-    <div>{{userinfo}}</div>
-
     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">My profile</h2>
 
         <div class="bg-white shadow overflow-hidden sm:rounded-lg container mx-auto my-12">
@@ -51,51 +49,16 @@
             </div>
         </div>
 
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Your blogs</h2>
+        <div class="container mx-auto">
+            <div class="text-center">
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">My blogs</h2>
+                <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+                    All the blogs you have published.
+                </p>
+            </div>
 
-<!--    <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">-->
-<!--        <div v-for="post in posts" :key="post.title" class="flex flex-col rounded-lg shadow-lg overflow-hidden">-->
-<!--            <div class="flex-shrink-0">-->
-<!--                <img class="h-48 w-full object-cover" :src="post.cover" alt="" />-->
-<!--            </div>-->
-<!--            <div class="flex-1 bg-white p-6 flex flex-col justify-between">-->
-<!--                <div class="flex-1">-->
-<!--                    <p class="text-sm font-medium text-indigo-600">-->
-<!--                        <Link href="/blogs" class="hover:underline">-->
-<!--                            Article-->
-<!--                        </Link>-->
-<!--                    </p>-->
-<!--                    <Link href="/blogs" class="block mt-2">-->
-<!--                        <p class="text-xl font-semibold text-gray-900">-->
-<!--                            {{ post.title }}-->
-<!--                        </p>-->
-<!--                        <p class="mt-3 text-base text-gray-500">-->
-<!--                            {{ post.summary }}-->
-<!--                        </p>-->
-<!--                    </Link>-->
-<!--                </div>-->
-<!--                <div class="mt-6 flex items-center">-->
-<!--                    <div class="flex-shrink-0">-->
-<!--                        <span class="sr-only">{{ post.author }}</span>-->
-<!--&lt;!&ndash;                        <img class="h-10 w-10 rounded-full" :src="" alt="" />&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    <div class="ml-3">-->
-<!--                        <p class="text-sm font-medium text-gray-900">-->
-<!--                            {{ post.author }}-->
-<!--                        </p>-->
-<!--                        <div class="flex space-x-1 text-sm text-gray-500">-->
-<!--&lt;!&ndash;                            <time :datetime="post.creationDate">&ndash;&gt;-->
-<!--&lt;!&ndash;                                {{ post.creationDate }}&ndash;&gt;-->
-<!--&lt;!&ndash;                            </time>&ndash;&gt;-->
-<!--                            <span aria-hidden="true">-->
-<!--                                        &middot;-->
-<!--                                    </span>-->
-<!--                            <span> {{ post.readingTime }} read </span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+            <BlogOverview :posts="posts" :settings="settings" />
+        </div>
 
     <Footer />
 
@@ -104,11 +67,15 @@
 <script>
 import Nav from "../Shared/Nav";
 import Footer from "../Shared/Footer";
+import BlogOverview from "../Shared/BlogOverview";
+
 export default {
-    components: {Footer, Nav},
+    components: {BlogOverview, Footer, Nav},
+
     props: {
         userinfo: Array,
         posts: Array,
+        settings: Boolean,
     }
 }
 </script>
