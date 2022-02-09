@@ -20,6 +20,7 @@ class CreateBlogsTable extends Migration
             $table->string('text');
             $table->string('summary');
             $table->string('author');
+            $table->string('authorID');
             $table->string('cover');
             $table->integer('readingTime');
             $table->timestamp('creationDate')->default(DB::raw('CURRENT_TIMESTAMP'));

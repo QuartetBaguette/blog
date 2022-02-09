@@ -112,7 +112,7 @@ export default {
         })
 
         function submit() {
-            Inertia.post('/login/validate', form)
+            Inertia.post('/login', form)
         }
 
         return { form, submit }

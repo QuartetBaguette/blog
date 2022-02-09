@@ -16,9 +16,9 @@
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <form class="space-y-6" @submit.prevent="submit">
                     <div>
-                        <label for="username" class="block text-sm font-medium text-gray-700"> Username </label>
+                        <label for="name" class="block text-sm font-medium text-gray-700"> Username </label>
                         <div class="mt-1">
-                            <input id="username" v-model="form.username" name="username" placeholder="Username" type="text" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                            <input id="name" v-model="form.name" name="name" placeholder="Username" type="text" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                         </div>
                     </div>
 
@@ -110,8 +110,6 @@ import Nav from '../Shared/Nav';
 import { Link } from '@inertiajs/inertia-vue3';
 import { reactive } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { ref } from 'vue'
-import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 import Footer from "../Shared/Footer";
 
 
@@ -123,7 +121,7 @@ export default {
     },
     setup () {
         const form = reactive({
-            username: null,
+            name: null,
             email: null,
             password: null,
             password_confirmation: null,
@@ -131,7 +129,7 @@ export default {
         })
 
         function submit() {
-            Inertia.post('/register/store', form)
+            Inertia.post('/register', form)
         }
 
         return { form, submit }

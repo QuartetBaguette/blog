@@ -52,7 +52,7 @@
                                     <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
                                 </MenuItem>
                                 <MenuItem v-slot="{ active }">
-                                    <Link href="/logout" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</Link>
+                                    <Link v-on:click="logout" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</Link>
                                 </MenuItem>
                             </MenuItems>
                         </transition>
@@ -74,6 +74,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { BellIcon, MenuIcon, XIcon, UserIcon, } from '@heroicons/vue/outline'
 import { Link } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia'
 
 const navigation = [
     { name: 'Home', href: '/'},
@@ -97,8 +98,11 @@ export default {
         Link,
     },
     setup() {
+        function logout() {
+            Inertia.post('/logout')
+        }
         return {
-            navigation,
+            navigation, logout,
         }
     },
 }
