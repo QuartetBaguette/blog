@@ -23,10 +23,10 @@ class CreateBlogsTable extends Migration
             $table->integer('authorID');
             $table->string('cover');
             $table->integer('readingTime')->default(0);
-            $table->boolean('comments')->nullable();
-            $table->boolean('anonymous')->nullable();
-            $table->boolean('likes')->nullable();
-            $table->boolean('featured')->nullable();
+            $table->boolean('comments')->default(false);
+            $table->boolean('anonymous')->default(false);
+            $table->boolean('likes')->default(false);
+            $table->boolean('featured')->default(false);
             $table->timestamp('creationDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });

@@ -12,7 +12,7 @@ class BlogController extends Controller
     public function createBlog(Request $request) {
         $this->validate($request, [
             'title' => 'required|min:2|max:40',
-            'summary' => 'required|min:10|max:220',
+            'summary' => 'required|min:10|max:255',
             'blogContent' => 'required|min:50',
         ]);
 

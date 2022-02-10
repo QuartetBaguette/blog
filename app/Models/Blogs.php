@@ -9,6 +9,12 @@ class Blogs extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'likes' => 'boolean',
+        'anonymous' => 'boolean',
+        'comments' => 'boolean',
+    ];
+
     protected $fillable = [
         'title',
         'text',

@@ -1,4 +1,6 @@
 <template>
+
+
     <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
         <div v-for="post in posts" :key="post.title" class="flex flex-col rounded-lg shadow-lg overflow-hidden">
             <div class="flex-shrink-0">
@@ -22,11 +24,21 @@
                 </div>
                 <div class="mt-6 flex items-center">
                     <div class="flex-shrink-0">
-                        <span class="sr-only">{{ post.author }}</span>
-                        <img class="h-10 w-10 rounded-full" alt="" />
+                        <span class="sr-only"></span>
+                        <span v-if="post.anonymous = true" class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                            <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </span>
+                        <span v-else class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                            <img class="h-full w-full rounded-full" alt="{{ post.author }}" />
+                        </span>
                     </div>
                     <div class="ml-3">
-                        <p class="text-sm font-medium text-gray-900">
+                        <p v-if="form.anonymous = true" class="text-sm font-medium text-gray-900">
+                            Anonymous
+                        </p>
+                        <p v-else class="text-sm font-medium text-gray-900">
                             {{ post.author }}
                         </p>
                         <div class="flex space-x-1 text-sm text-gray-500">
@@ -42,7 +54,7 @@
                 </div>
                 <div v-if="settings" class="pt-4">
                     <form @submit.prevent="submit">
-                        <button type="submit" v-model="form.blogID" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                             <ExclamationIcon class="w-6 h-6 mr-1" />Delete post
                         </button>
                     </form>
