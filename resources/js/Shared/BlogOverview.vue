@@ -13,7 +13,7 @@
                             Article
                         </Link>
                     </p>
-                    <Link href="/blog" class="block mt-2">
+                    <Link :href="'/blogs/' + post.id" class="block mt-2">
                         <p class="text-xl font-semibold text-gray-900">
                             {{ post.title }}
                         </p>
@@ -85,8 +85,10 @@ export default {
             blogID: null,
         })
 
-        function submit() {
-            Inertia.post('/blog/delete', form)
+        function submit(postId) {
+
+            Inertia.post(route('blogs.destroy', postId))
+
         }
 
         return { form, submit }

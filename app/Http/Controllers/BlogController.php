@@ -2,41 +2,91 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Blogs;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class BlogController extends Controller
 {
-    public function createBlog(Request $request) {
-        $this->validate($request, [
-            'title' => 'required|min:2|max:40',
-            'summary' => 'required|min:10|max:255',
-            'blogContent' => 'required|min:50',
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return Inertia::render('Blogs/Index', [
+            'posts' => Blogs::all(),
         ]);
-
-        $current_userID = Auth::id();
-        $user = User::get()->where('id', $current_userID);
-
-        Blogs::create([
-            'title' => $request->title,
-            'summary' => $request->summary,
-            'text' => $request->blogContent,
-            'cover' => $request->cover,
-            'readingTime' => 20,
-            'comments' => $request->comments,
-            'anonymous' => $request->anonymous,
-            'likes' => $request->likes,
-            'author' => $user[0]['name'],
-            'authorID' => $current_userID,
-            'featured' => false,
-        ]);
-
-        return redirect('blogs');
     }
 
-    public function deleteBlog(Request $request) {
-        dd($request);
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return Inertia::render('CreateBlog');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Blog  $blog
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Blog $blog)
+    {
+        return Inertia::render('Blog', [
+            'blog' => $blog,
+         ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Blog  $blog
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Blog $blog)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Blog  $blog
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Blog $blog)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Blog  $blog
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Blog $blog)
+    {
+        $blog->delete();
+        return back();
     }
 }

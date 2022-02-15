@@ -29,7 +29,7 @@
                 </svg>
             </div>
         </div>
-        <div v-for="blog in blogs" class="relative px-4 sm:px-6 lg:px-8 mx-auto">
+        <div class="relative px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="text-lg max-w-prose mx-auto">
                 <Link href="/blogs">
                     <div class="flex">
@@ -64,7 +64,7 @@ export default {
     components: {Footer, Nav, ArrowLeftIcon, Link},
 
     props: {
-        blogs: Array,
+        blog: Object,
     },
 }
 </script>

@@ -99,7 +99,7 @@
                         </div>
                         <div class="flex justify-end">
                             <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
-                            <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                            <button type="submit" :disabled="form.processing" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
                         </div>
                     </form>
                 </div>
@@ -123,24 +123,45 @@ export default {
         Nav,
         Link,
     },
-
-    setup () {
-        const form = reactive({
-            title: null,
-            summary: null,
-            blogContent: null,
-            cover: 'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
-            readingTime: null,
-            comments: false,
-            anonymous: false,
-            likes: false,
-        })
-
-        function submit() {
-            Inertia.post('/blog/create', form)
+    data() {
+        return {
+            form: this.$inertia.form({
+                title: null,
+                summary: null,
+                blogContent: null,
+                cover: 'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
+                readingTime: null,
+                comments: false,
+                anonymous: false,
+                likes: false,
+            })
+        }
+    },
+    methods: {
+        submit() {
+            this.form.post(route('blog.create'))
+            // Inertia.post('/blog/create', this.form)
         }
 
-        return {form, submit}
     }
+
+    // setup () {
+    //     const form = reactive({
+    //         title: null,
+    //         summary: null,
+    //         blogContent: null,
+    //         cover: 'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
+    //         readingTime: null,
+    //         comments: false,
+    //         anonymous: false,
+    //         likes: false,
+    //     })
+
+    //     function submit() {
+    //         Inertia.post('/blog/create', form)
+    //     }
+
+    //     return {form, submit}
+    // }
 }
 </script>

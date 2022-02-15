@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Blog_2Controller;
+use App\Http\Controllers\HomeController;
 use App\Models\Blogs;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -10,31 +12,38 @@ use Inertia\Inertia;
 //// VIEW PAGES
 
 // HOME PAGES
-Route::get('/', function() {
-    return Inertia::render('Home', [
-        'posts' => Blogs::get()->where('featured', '=', true),
-    ]);
-});
-Route::get('/home', function() {
-    return Inertia::render('Home', [
-        'posts' => Blogs::get()->where('featured', '=', true),
-    ]);
-})->name('home');
+// Route::get('/', function() {
+//     return Inertia::render('Home', [
+//         'posts' => Blogs::get()->where('featured', '=', true),
+//     ]);
+// });
+
+Route::get('/', [HomeController::class, 'index'] );
+
+// Route::get('/home', function() {
+//     return Inertia::render('Home', [
+//         'posts' => Blogs::get()->where('featured', '=', true),
+//     ]);
+// })->name('home');
 //
 
+// Route::resource('blogs', BlogController::class);
+
 // ALL BLOGS
-Route::get('/blogs', function() {
-    return Inertia::render('Blogs', [
-        'posts' => Blogs::all(),
-    ]);
-})->name('blogs');
+// Route::get('/blogs', function() {
+//     return Inertia::render('Blogs', [
+//         'posts' => Blogs::all(),
+//     ]);
+// })->name('blogs');
 
 // SINGLE BLOG
-Route::get('/blog', function() {
-    return Inertia::render('Blog', [
-       'blogs' => Blogs::get()->where('id','3'),
-    ]);
-})->name('blog');
+
+
+// Route::get('/blog', function() {
+//     return Inertia::render('Blog', [
+//        'blogs' => Blogs::get()->where('id','3'),
+//     ]);
+// })->name('blog');
 
 //// MIDDLEWARE GUEST
 Route::group(['middleware' => 'guest'], function() {
@@ -55,8 +64,11 @@ Route::group(['middleware' => 'guest'], function() {
 Route::group(['middleware' => 'auth'], function() {
 
     // CREATE BLOG CONTROLLER
-    Route::post('/blog/create', [BlogController::class, 'createBlog'])
+    Route::post('/blog/create', [Blog_2Controller::class, 'createBlog'])
         ->name('blog.create');
+
+    Route::get('/blogs/create', [BlogController::class, 'create']);
+
 
     // CREATE BLOG PAGE
     Route::get('/createblog', function() {
@@ -66,6 +78,9 @@ Route::group(['middleware' => 'auth'], function() {
     // DELETE BLOG
     Route::post('/blog/delete/', [BlogController::class, 'deleteBlog'])
         ->name('blog.delete');
+    Route::delete('blogs/{blog}' , [BlogController::class, 'destroy'])
+        ->name('blogs.destroy');
+
 
     // SETTINGS PAGE
     Route::get('/settings', function() {
@@ -87,3 +102,8 @@ Route::group(['middleware' => 'auth'], function() {
 Route::get('/usermanagement', function() {
     return Inertia::render('Admin/UserManagement');
 });
+
+
+Route::get('blogs/{blog}', [BlogController::class, 'show'])->name('blogs.show');
+
+Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
