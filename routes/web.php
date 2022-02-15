@@ -32,7 +32,7 @@ Route::get('/blogs', function() {
 // SINGLE BLOG
 Route::get('/blog', function() {
     return Inertia::render('Blog', [
-       'blogs' => Blogs::get()->where('id','1'),
+       'blogs' => Blogs::get()->where('id','3'),
     ]);
 })->name('blog');
 
