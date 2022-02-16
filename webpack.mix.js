@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const path = require('path')
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -18,3 +18,11 @@ mix.js("resources/js/app.js", "public/js")
         require("tailwindcss"),
     ])
     .version();
+
+mix.webpackConfig({
+    resolve: {
+        alias: {
+            ziggy: path.resolve('vendor/tightenco/ziggy/dist'),
+        },
+    },
+});

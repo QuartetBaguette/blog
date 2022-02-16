@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blogs extends Model
+class Blog extends Model
 {
     use HasFactory;
 
@@ -13,20 +13,18 @@ class Blogs extends Model
         'likes' => 'boolean',
         'anonymous' => 'boolean',
         'comments' => 'boolean',
+        'created_at' => 'datetime:Y-m-d H:i'
     ];
 
     protected $fillable = [
         'title',
-        'text',
+        'content',
         'summary',
-        'author',
-        'authorID',
-        'cover',
-        'imageURL',
-        'readingTime',
-        'comments',
-        'anonymous',
-        'likes',
-        'featured',
+        'user_id',
+        'cover_url',
+        'reading_time',
+        'can_comment',
+        'is_anonymous',
+        'is_featured',
     ];
 }

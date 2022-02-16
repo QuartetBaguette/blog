@@ -25,11 +25,6 @@
                 </div>
 
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <button type="button" class="bg-gray-500 p-1 rounded-full text-white hover:text-gray-400 hover:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-offset-gray-800 hover:ring-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                        <span class="sr-only">View notifications</span>
-                        <BellIcon class="h-6 w-6" aria-hidden="true" />
-                    </button>
-
                     <!-- Profile dropdown -->
                     <Menu as="div" class="ml-3 relative">
                         <div>
@@ -39,17 +34,14 @@
                             </MenuButton>
                         </div>
                         <div>
-                            <Link href="/loginpage" class="text-white">
+                            <Link href="/login" class="text-white">
                                 <UserIcon class="h-6 w-6" aria-hidden="true" />
                             </Link>
                         </div>
                         <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                             <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <MenuItem v-slot="{ active }">
-                                    <Link href="/myprofile" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Profile</Link>
-                                </MenuItem>
-                                <MenuItem v-slot="{ active }">
-                                    <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
+                                    <Link :href="route('profile')" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Profile</Link>
                                 </MenuItem>
                                 <MenuItem v-slot="{ active }">
                                     <Link v-on:click="logout" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</Link>
@@ -77,9 +69,9 @@ import { Link } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia'
 
 const navigation = [
-    { name: 'Home', href: '/'},
-    { name: 'Blogs', href: '/blogs' },
-    { name: 'Write blog', href: '/createblog' },
+    { name: 'Home', href: route('home')},
+    { name: 'Blogs', href: route('blogs.index') },
+    { name: 'Write blog', href: route('create.blog') },
 ]
 
 export default {
