@@ -41,8 +41,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/blog/delete/{id}', [BlogController::class, 'destroy'])->name('blogs.delete');
 
     // CREATE COMMENT
-    Route::post('/comment/store', [CommentsController::class, 'store'])->name('comments.store')
-        ->middleware('throttle:0,01');
+    Route::post('/comment/store', [CommentsController::class, 'store'])->name('comments.store');
 
     // USER PROFILE PAGE
     Route::get('/myprofile', [UserPagesController::class, 'profile'])->name('profile');

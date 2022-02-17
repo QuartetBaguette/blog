@@ -12,6 +12,20 @@
             </p>
         </div>
 
+        <div class="container mx-auto flex justify-center mt-2" v-if="errors.email || errors.password">
+            <div class="flex rounded-md border border-yellow-500 bg-yellow-50 p-4">
+                <div class="flex-shrink-0">
+                    <ExclamationIcon class="h-5 w-5 text-yellow-400" aria-hidden="true" />
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-yellow-800">Attention needed</h3>
+                    <div class="text-sm text-yellow-700" v-for="error in errors">
+                        <p>&middot; {{error}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <form class="space-y-6" @submit.prevent="submit">
@@ -46,13 +60,20 @@ import { Link } from '@inertiajs/inertia-vue3';
 import {reactive} from "vue";
 import {Inertia} from "@inertiajs/inertia";
 import Footer from "../../Shared/Layout/Footer";
+import { ExclamationIcon } from '@heroicons/vue/solid'
 
 export default {
     components: {
         Footer,
         Nav,
         Link,
+        ExclamationIcon,
     },
+
+    props: {
+        errors: Object,
+    },
+
     setup(){
         const form = reactive({
             email: null,

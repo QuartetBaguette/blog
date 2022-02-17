@@ -27,4 +27,12 @@ class Blog extends Model
         'is_anonymous',
         'is_featured',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
 }

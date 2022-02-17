@@ -22,8 +22,8 @@ class CreateCommentsTable extends Migration
         });
 
         Schema::table('comments', function ($table) {
-            $table->foreign('blog_id')->references('id')->on('blogs');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -6,6 +6,20 @@
         </h2>
     </div>
 
+    <div class="container mx-auto flex justify-center" v-if="errors.content || errors.summary || errors.title">
+        <div class="flex rounded-md border border-yellow-500 bg-yellow-50 p-4">
+            <div class="flex-shrink-0">
+                <ExclamationIcon class="h-5 w-5 text-yellow-400" aria-hidden="true" />
+            </div>
+            <div class="ml-3">
+                <h3 class="text-sm font-medium text-yellow-800">Attention needed</h3>
+                <div class="text-sm text-yellow-700" v-for="error in errors">
+                    <p>&middot; {{error}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="space-y-6 container mx-auto py-4">
         <div class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
             <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -35,7 +49,7 @@
                         <div>
                             <label for="content" class="block text-sm font-medium text-gray-700"> Content </label>
                             <div class="mt-1">
-                                <textarea id="content" v-model="form.blogContent" required="" name="content" rows="15" class="py-3 px-4 block w-full shadow-sm text-black focus:ring-black focus:boring-black border border-gray-500 rounded-md" placeholder="Content" />
+                                <textarea id="content" v-model="form.content" required="" name="content" rows="15" class="py-3 px-4 block w-full shadow-sm text-black focus:ring-black focus:boring-black border border-gray-500 rounded-md" placeholder="Content" />
                             </div>
                             <p class="mt-2 text-sm text-gray-500">Main content of you blog article.</p>
                         </div>
@@ -88,19 +102,25 @@ import Footer from "../../Shared/Layout/Footer";
 import { Link } from '@inertiajs/inertia-vue3';
 import { reactive } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
+import { ExclamationIcon } from '@heroicons/vue/solid'
 
 export default {
     components: {
         Footer,
         Nav,
         Link,
+        ExclamationIcon,
+    },
+
+    props: {
+        errors: Object,
     },
 
     setup () {
         const form = reactive({
             title: null,
             summary: null,
-            blogContent: null,
+            content: null,
             cover: 'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
             readingTime: null,
             comments: false,

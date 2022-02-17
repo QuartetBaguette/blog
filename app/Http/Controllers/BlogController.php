@@ -18,7 +18,7 @@ class BlogController extends Controller
     public function index()
     {
         return Inertia::render('Blogs/Index', [
-            'posts' => Blog::All(),
+            'posts' => Blog::with('user')->get(),
         ]);
     }
 
@@ -40,16 +40,17 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'title' => 'required|min:2|max:40|unique:blogs',
             'summary' => 'required|min:10|max:255|unique:blogs',
-            'blogContent' => 'required|min:50|unique:blogs',
+            'content' => 'required|min:50|unique:blogs',
         ]);
 
         Blog::create([
             'title' => $request->title,
             'summary' => $request->summary,
-            'content' => $request->blogContent,
+            'content' => $request->content,
             'cover_url' => $request->cover,
             'reading_time' => 20,
             'can_comment' => $request->comments,
@@ -70,8 +71,7 @@ class BlogController extends Controller
     public function show($id)
     {
         return Inertia::render('Blogs/Show', [
-            'blogs' => Blog::where('id', '=', $id)->get(),
-            'comments' => Comment::where('blog_id', '=', $id)->get(),
+            'blog' => Blog::with('comments.user', 'user')->find($id),
         ]);
     }
 
@@ -83,7 +83,7 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        Blog::where('id', '=', $id)->delete();
+        Blog::find($id)->delete();
         return back();
     }
 }
