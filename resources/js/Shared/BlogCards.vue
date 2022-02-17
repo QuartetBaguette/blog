@@ -8,12 +8,12 @@
             </div>
             <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                 <div class="flex-1">
-                    <p class="text-sm font-medium text-indigo-600">
+                    <!-- <p class="text-sm font-medium text-indigo-600">
                         <Link href="/blogs" class="hover:underline">
                             Article
                         </Link>
-                    </p>
-                    <Link :href="'/blog/' + post.id" class="block mt-2">
+                    </p> -->
+                    <Link :href="route('blogs.show', post.id)" class="block mt-2">
                         <p class="text-xl font-semibold text-gray-900">
                             {{ post.title }}
                         </p>
@@ -53,9 +53,9 @@
                     </div>
                 </div>
                 <div v-if="settings" class="pt-4">
-                    <Link type="submit" :href="'/blog/delete/' + post.id" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    <button type="submit" @click="deletePost(post.id)" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                         <ExclamationIcon class="w-6 h-6 mr-1" />Delete post
-                    </Link>
+                    </button>
                 </div>
             </div>
         </div>
@@ -77,5 +77,15 @@ export default {
         posts: Array,
         settings: Boolean,
     },
+    data() {
+        return {
+            deleteForm: this.$inertia.form()
+        }
+    },
+    methods: {
+        deletePost(id) {
+            this.deleteForm.delete(route('blogs.destroy', id))
+        }
+    }
 }
 </script>

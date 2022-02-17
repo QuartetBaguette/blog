@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import Nav from '../Shared/Layout/Nav';
+import Nav from '@/Shared/Layout/Nav';
 import { Link } from '@inertiajs/inertia-vue3';
-import Footer from "../Shared/Layout/Footer";
-import BlogOverview from "../Shared/BlogCards";
+import Footer from "@/Shared/Layout/Footer";
+import BlogOverview from "@/Shared/BlogCards";
 
 export default {
     components: {

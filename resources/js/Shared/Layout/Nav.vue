@@ -73,7 +73,7 @@ import { Inertia } from '@inertiajs/inertia'
 const navigation = [
     { name: 'Home', href: route('home')},
     { name: 'Blogs', href: route('blogs.index') },
-    { name: 'Write blog', href: route('create.blog') },
+    { name: 'Write blog', href: route('blogs.create') },
 ]
 
 export default {

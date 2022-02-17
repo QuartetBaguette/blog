@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -38,28 +39,17 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(BlogRequest $blogRequest)
     {
 
-        $this->validate($request, [
-            'title' => 'required|min:2|max:40|unique:blogs',
-            'summary' => 'required|min:10|max:255|unique:blogs',
-            'content' => 'required|min:50|unique:blogs',
-        ]);
+        $blogData = $blogRequest->validated();
 
-        Blog::create([
-            'title' => $request->title,
-            'summary' => $request->summary,
-            'content' => $request->content,
-            'cover_url' => $request->cover,
-            'reading_time' => 20,
-            'can_comment' => $request->comments,
-            'is_anonymous' => $request->anonymous,
-            'user_id' => Auth::id(),
-            'is_featured' => false,
-        ]);
+        $blogData['user_id'] = Auth::id();
+        $blogData['reading_time'] = 20;
 
-        return redirect('/blogs');
+        $blog = Blog::create($blogData);
+
+        return redirect(route('blogs.show', $blog->id));
     }
 
     /**
@@ -81,9 +71,9 @@ class BlogController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Blog $blog)
     {
-        Blog::find($id)->delete();
+        $blog->delete();
         return back();
     }
 }

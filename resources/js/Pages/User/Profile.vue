@@ -9,7 +9,7 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Your profile information</h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details.</p>
             </div>
-            <div v-for="info in userinfo" class="border-t border-gray-200 px-4 py-5 sm:px-6">
+            <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                 <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Name</dt>
@@ -47,15 +47,15 @@
 </template>
 
 <script>
-import Nav from "../../Shared/Layout/Nav";
-import Footer from "../../Shared/Layout/Footer";
-import BlogOverview from "../../Shared/BlogCards";
+import Nav from "@/Shared/Layout/Nav";
+import Footer from "@/Shared/Layout/Footer";
+import BlogOverview from "@/Shared/BlogCards";
 
 export default {
     components: {BlogOverview, Footer, Nav},
 
     props: {
-        userinfo: Array,
+        info: Object,
         posts: Array,
         settings: Boolean,
     }

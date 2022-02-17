@@ -64,7 +64,7 @@
                                 <div class="mt-4 space-y-4">
                                     <div class="flex items-start">
                                         <div class="h-5 flex items-center">
-                                            <input id="comments" v-model="form.comments" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                                            <input id="comments" v-model="form.can_comment" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
                                         </div>
                                         <div class="ml-3 text-sm">
                                             <label for="comments" class="font-medium text-gray-700">Disable comments</label>
@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="flex items-start">
                                         <div class="flex items-center h-5">
-                                            <input id="anonymous" v-model="form.anonymous" name="anonymous" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                                            <input id="anonymous" v-model="form.is_anonymous" name="anonymous" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
                                         </div>
                                         <div class="ml-3 text-sm">
                                             <label for="anonymous" class="font-medium text-gray-700">Anonymous post</label>
@@ -97,8 +97,8 @@
 </template>
 
 <script>
-import Nav from '../../Shared/Layout/Nav';
-import Footer from "../../Shared/Layout/Footer";
+import Nav from '@/Shared/Layout/Nav';
+import Footer from "@/Shared/Layout/Footer";
 import { Link } from '@inertiajs/inertia-vue3';
 import { reactive } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
@@ -121,10 +121,10 @@ export default {
             title: null,
             summary: null,
             content: null,
-            cover: 'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
-            readingTime: null,
-            comments: false,
-            anonymous: false,
+            cover_url: 'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
+            reading_time: null,
+            can_comment: false,
+            is_anonymous: false,
         })
 
         function submit() {

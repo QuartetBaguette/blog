@@ -19,9 +19,10 @@ class UserPagesController extends Controller
     }
 
     public function profile() {
+        $user = Auth::user();
         return Inertia::render('User/Profile', [
-            'userinfo' => User::where('id', '=', Auth::id())->get(),
-            'posts' => Blog::where('user_id', '=', Auth::id())->get(),
+            'info' => $user,
+            'posts' => $user->blogs,
             'settings' => true,
         ]);
     }
